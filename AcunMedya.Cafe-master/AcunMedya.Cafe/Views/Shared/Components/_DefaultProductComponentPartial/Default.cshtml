@@ -1,0 +1,44 @@
+﻿@model List<AcunMedya.Cafe.Entities.Product>
+
+@{
+    var groupedProducts = Model.GroupBy(p => p.Category.CategoryName);
+}
+
+<section class="menu-area section-gap" id="coffee">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-10">
+                <div class="title text-center">
+                    <h1 class="mb-10">Sizin için hazırladığımız özel çaylar</h1>
+                    <p>Organik tarım metodlarıyla, doğaya saygılı olarak yetiştirilen en kaliteli çay yaprakları ile hazırlanmış içecekler</p>
+                </div>
+            </div>
+        </div>
+
+        @foreach (var group in groupedProducts)
+        {
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3 class="text-center">@group.Key</h3> <!-- Kategori adı -->
+                </div>
+                <br>
+
+                @foreach (var item in group)
+                {
+                    <br />
+                    <div class="col-lg-4">
+                        <div class="single-menu">
+                            <div class="title-div justify-content-between d-flex">
+                                <h4>@item.ProductName</h4>
+                                <p class="price float-right">
+                                    ₺@item.ProductPrice
+                                </p>
+                            </div>
+                            <p>@item.Description</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

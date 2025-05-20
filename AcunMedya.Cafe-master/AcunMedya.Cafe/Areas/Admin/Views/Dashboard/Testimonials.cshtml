@@ -1,0 +1,51 @@
+﻿@model List<AcunMedya.Cafe.Entities.Testimonial>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Müşteri Yorumları</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Başlık</th>
+                                <th> Açıklama</th>
+                                <th> Puan </th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                                
+                            
+                            <tr>
+                                <td>
+                                    @item.Title
+                                   
+                                </td>
+                                <td> @item.Description </td>
+                                    <div class="star">
+                                        @for (int i = 1; i < 6; i++)
+                                        {
+                                            if (i <= item.raiting)
+                                            {
+                                                <span class="fa fa-star checked"></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="fa fa-star"></span>
+                                            }
+                                        }
+
+                                    </div>
+                            </tr>
+               }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+﻿@using System.Text.Json
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    var categoryLabels = JsonSerializer.Serialize(ViewBag.CategoryLabels);
+    var categoryValues = JsonSerializer.Serialize(ViewBag.CategoryValues);
+    var narinuluisik7 = "https://medium.com/@narinuluisik7/modern-web-geli%C5%9Ftirmenin-kalbinde-asp-net-core-2647f4ee0507";
+}
+
+<div class="main-panel w-100" style="min-height:100vh;">
+    <div class="content-wrapper px-4">
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-home"></i>
+                </span> Ana Sayfa
+            </h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/PurpleAdmin-Free-Admin-Template-1.0.0/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Toplam Ürün <i class="mdi mdi-chart-line mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@ViewBag.V1</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/PurpleAdmin-Free-Admin-Template-1.0.0/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Toplam Kategori <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@ViewBag.V2</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/PurpleAdmin-Free-Admin-Template-1.0.0/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Referans <i class="mdi mdi-diamond mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@ViewBag.V3</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ürün Kategori Dağılımı</h4>
+                        <br />
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                @await Component.InvokeAsync("_AdminDashboardTestimonialComponentPartial")
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const categoryLabels = @Html.Raw(categoryLabels);
+    const categoryValues = @Html.Raw(categoryValues);
+
+    const ctx = document.getElementById('categoryChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: categoryLabels,
+            datasets: [{
+                label: 'Ürün Sayısı',
+                data: categoryValues,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)'
+                ],
+                borderColor: '#fff',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+

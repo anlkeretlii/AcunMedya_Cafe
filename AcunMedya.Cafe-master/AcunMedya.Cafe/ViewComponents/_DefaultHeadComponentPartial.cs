@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewComponents; // ViewComponent için gerekli namespace
 
 namespace AcunMedya.Cafe.ViewComponents
 {
@@ -10,6 +11,3 @@ namespace AcunMedya.Cafe.ViewComponents
 		}
 	}
 }
-
-
-//Views Shared Components ismini Default

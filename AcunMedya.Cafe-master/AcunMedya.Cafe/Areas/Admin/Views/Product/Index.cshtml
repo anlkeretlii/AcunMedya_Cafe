@@ -1,0 +1,83 @@
+﻿@model List<AcunMedya.Cafe.Entities.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title"> Ürün Tablsou </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Tablo</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ürün Tablosu</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ürün İsmi</th>
+                                <th>Fiyatı</th>
+                                <th>Açıklaması</th>
+                                <th>Resmi</th>
+                                <th>Kategorisi</th>
+                                <th>Güncelle</th>
+                                <th>Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.ProductPrice</td>
+                                    <td>@item.Description</td>
+                                    <td><img src="@item.ImageUrl" style="width:75px; height:75px"/></td>
+                                    <td>@item.Category.CategoryName</td>
+                                    <td><a href="/Admin/Product/UpdateProduct/@item.ProductId" class="badge badge-info">Güncelle</a></td>
+                                    <td><a onclick="deleteProduct(@item.ProductId)" class="badge badge-danger">Sil</a></td>
+                @*                    <td><a href="/Product/DeleteProduct/@item.ProductId" class="badge badge-danger">Sil</a></td>*@
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                    <a href="/Product/AddProduct" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Yeni Ürün</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function deleteProduct(id) {
+        Swal.fire({
+            title: 'Silmek İstediğinize Emin Misiniz?',
+            text: "Bu işlem geri alınamaz!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet, Sil!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Product/DeleteProduct/" + id;
+            }
+        })
+    }
+</script>

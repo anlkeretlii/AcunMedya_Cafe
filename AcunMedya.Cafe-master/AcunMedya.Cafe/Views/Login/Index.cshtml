@@ -1,0 +1,225 @@
+﻿@{
+    Layout = null;
+}
+
+@model AcunMedya.Cafe.Entities.User
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenLeaf Cafe - Yönetim Girişi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/coffee-master/img/tea-background.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .login-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+        }
+        
+        .login-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .login-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .login-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo img {
+            width: 60px;
+            height: auto;
+        }
+        
+        .login-form {
+            padding: 30px 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: none;
+            background-color: #f8f9fa;
+            border-radius: 50px;
+            font-size: 14px;
+            color: #333;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4CAF50;
+            background-color: white;
+        }
+        
+        .icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4CAF50;
+        }
+        
+        .text-danger {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            padding-left: 15px;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .login-btn:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .login-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px 25px;
+            border-top: 1px solid #eee;
+            background-color: #f8f9fa;
+        }
+        
+        .footer p {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .leaf {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .leaf-1 {
+            top: 20px;
+            left: -20px;
+            font-size: 60px;
+            transform: rotate(-30deg);
+            color: #4CAF50;
+        }
+        
+        .leaf-2 {
+            bottom: 20px;
+            right: -20px;
+            font-size: 60px;
+            transform: rotate(30deg);
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="~/coffee-master/img/tea-leaf-logo.png" alt="GreenLeaf Logo" onerror="this.src='https://via.placeholder.com/60x60?text=GL';this.onerror='';">
+        </div>
+        
+        <div class="login-header">
+            <h1>GreenLeaf Cafe</h1>
+            <p>Yönetim Paneli Girişi</p>
+        </div>
+        
+        <form asp-action="Index" method="post" class="login-form">
+            <div class="form-group">
+                <i class="fas fa-user icon"></i>
+                <input asp-for="UserName" class="form-control" placeholder="Kullanıcı Adı" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <i class="fas fa-lock icon"></i>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Şifre" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            
+            <button type="submit" class="login-btn">
+                Giriş Yap
+            </button>
+        </form>
+        
+        <div class="footer">
+            <p>&copy; @DateTime.Now.Year GreenLeaf Cafe - Tüm hakları saklıdır</p>
+        </div>
+        
+        <i class="fas fa-leaf leaf leaf-1"></i>
+        <i class="fas fa-leaf leaf leaf-2"></i>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
